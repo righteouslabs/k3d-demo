@@ -14,14 +14,14 @@
         "ghcr.io/devcontainers/features/docker-in-docker:2": {
             "enableNonRootDocker": "true",
             "moby": "true"
-        }
+        },
     },
     // Use 'forwardPorts' to make a list of ports inside the container available locally.
     "forwardPorts": [],
     // Use 'postCreateCommand' to run commands after the container is created.
-    "postCreateCommand": "chmod u+x ./.devcontainer/postCreateCommand.sh && ./.devcontainer/postCreateCommand.sh",
+    "postCreateCommand": "./.devcontainer/postCreateCommand.sh",
     // Command to run after starting the container. This command is run after "postCreateCommand" and before "postAttachCommand".
-    "postStartCommand": "chmod u+x ./.devcontainer/postStartCommand.sh && ./.devcontainer/postStartCommand.sh",
+    "postStartCommand": "./.devcontainer/postStartCommand.sh",
     // Configure tool-specific properties.
     "customizations": {
         "codespaces": {},

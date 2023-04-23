@@ -1,4 +1,4 @@
-.PHONY: prep demo demo-multiserver demo-configfile demo-tilt demo-drone
+.PHONY: prep demo demo-multiserver demo-configfile demo-tilt demo-drone dev-container
 
 demo:
 	scripts/lifecycle.sh
@@ -17,3 +17,6 @@ demo-drone:
 
 prep:
 	scripts/prep.sh
+
+dev-container:
+	scripts/dev-container.sh

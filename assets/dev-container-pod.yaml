@@ -1,0 +1,54 @@
+# Create a pod with a dev container
+kind: Pod
+apiVersion: v1
+metadata:
+  name: dev-containers
+  namespace: default
+spec:
+  # Create a single container in the pod
+  containers:
+  - name: dev-container
+    image: mcr.microsoft.com/devcontainers/dotnet:0-7.0
+    command:
+      - /bin/bash
+      - -c
+      - |
+        # Global configurations
+        sudo apt-get update
+        git config --global --replace-all "safe.directory" "*"
+
+        # Clone dotnet sample
+        git clone https://github.com/dotnet/blazor-samples
+
+        # Change directory to blazor sample
+        cd blazor-samples/7.0/BlazorSample_WebAssembly
+
+        # Sleep forever
+        while sleep 1000; do :; done
+    resources:
+      requests:
+        cpu: 250m
+        memory: 1Gi
+      limits:
+        cpu: 1000m
+        memory: 2Gi
+    volumeMounts:
+    - mountPath: "/home/vscode" # This is the default home directory for the dev container
+      name: volume
+  volumes:
+  - name: volume
+    persistentVolumeClaim:
+      claimName: dev-containers
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: dev-containers
+  namespace: default
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      # 100 Megabytes of storage set aside for the dev container home directory
+      storage: 100Mi
