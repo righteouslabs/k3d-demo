@@ -1,0 +1,92 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/typescript-node
+// Variables in devcontainer.json: https://containers.dev/implementors/json_reference/#variables-in-devcontainerjson
+{
+    "name": "k3d-demo",
+    // More info: https://containers.dev/guide/dockerfile
+    "build": {
+        // Path is relataive to the devcontainer.json file.
+        "dockerfile": "Dockerfile"
+    },
+    // Features to add to the dev container. More info: https://containers.dev/features.
+    "features": {
+        // Reference: https://github.com/devcontainers/features/tree/main/src/docker-in-docker
+        "ghcr.io/devcontainers/features/docker-in-docker:2": {
+            "enableNonRootDocker": "true",
+            "moby": "true"
+        }
+    },
+    // Use 'forwardPorts' to make a list of ports inside the container available locally.
+    "forwardPorts": [],
+    // Use 'postCreateCommand' to run commands after the container is created.
+    "postCreateCommand": "./.devcontainer/postCreateCommand.sh",
+    // Command to run after starting the container. This command is run after "postCreateCommand" and before "postAttachCommand".
+    "postStartCommand": "./.devcontainer/postStartCommand.sh",
+    // Configure tool-specific properties.
+    "customizations": {
+        "codespaces": {},
+        "vscode": {
+            "extensions": [
+                "eamodio.gitlens",
+                "ms-kubernetes-tools.vscode-kubernetes-tools",
+                "tilt-dev.tiltfile",
+                "GitHub.copilot",
+                "vscode-icons-team.vscode-icons",
+                "mutantdino.resourcemonitor",
+                "streetsidesoftware.code-spell-checker",
+            ],
+            "settings": {
+                "workbench.iconTheme": "vscode-icons",
+                "files.eol": "\n",
+                // These are local paths within the dev container
+                "vscode-kubernetes.minikube-path": "/usr/local/bin/minikube",
+                "vscode-kubernetes.minikube-path.linux": "/usr/local/bin/minikube",
+                "vscode-kubernetes.kubectl-path": "/usr/local/bin/kubectl",
+                "vscode-kubernetes.kubectl-path.linux": "/usr/local/bin/kubectl",
+                "vscode-kubernetes.helm-path.linux": "/usr/local/bin/helm",
+                "vscode-kubernetes.helm-path": "/usr/local/bin/helm",
+                "vs-kubernetes": {
+                    // These are local paths within the dev container
+                    "vscode-kubernetes.minikube-path": "/usr/local/bin/minikube",
+                    "vscode-kubernetes.minikube-path.linux": "/usr/local/bin/minikube",
+                    "vscode-kubernetes.kubectl-path": "/usr/local/bin/kubectl",
+                    "vscode-kubernetes.kubectl-path.linux": "/usr/local/bin/kubectl",
+                    "vscode-kubernetes.helm-path.linux": "/usr/local/bin/helm",
+                    "vscode-kubernetes.helm-path": "/usr/local/bin/helm",
+                    "vs-kubernetes.namespace": "yatra.cloud",
+                    "vs-kubernetes.kubectl-path": "/usr/local/bin/kubectl",
+                    "vs-kubernetes.helm-path": "/usr/local/bin/helm",
+                    "vs-kubernetes.minikube-path": "/usr/local/bin/minikube",
+                    "vs-kubernetes.kubectlVersioning": "user-provided",
+                    "vs-kubernetes.outputFormat": "yaml",
+                    "vs-kubernetes.kubeconfig": "/home/vscode/.kube/config",
+                    "vs-kubernetes.knownKubeconfigs": [],
+                    "vs-kubernetes.ignore-recommendations": true,
+                    "checkForMinikubeUpgrade": false,
+                    "imageBuildTool": "Docker"
+                },
+            }
+        }
+    },
+    // Set environment variable: https://containers.dev/implementors/spec/#environment-variables
+    "remoteEnv": {
+        "LOCAL_WORKSPACE_FOLDER": "${localWorkspaceFolder}"
+    },
+    "containerEnv": {
+        "DOCKER_DEFAULT_PLATFORM": "${localEnv:DOCKER_DEFAULT_PLATFORM}",
+        "KUBECONFIG": "/home/vscode/.kube/config"
+    },
+    // Mount points to set up when creating the container
+    "mounts": [
+        // // Mount the "~/.kube" folder from local machine to inside the dev container
+        // "source=${localEnv:HOME}${localEnv:USERPROFILE}/.kube,target=/home/vscode/.kube,type=bind,consistency=cached",
+
+        // // Mount the "~/.minikube" folder from local machine to inside the dev container
+        // "source=${localEnv:HOME}${localEnv:USERPROFILE}/.minikube,target=/home/vscode/.minikube,type=bind,consistency=cached",
+
+        // Mount the "~/.azure" folder from local machine to inside the dev container
+        "source=${localEnv:HOME}${localEnv:USERPROFILE}/.azure,target=/home/vscode/.azure,type=bind,consistency=cached"
+    ]
+    // Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
+    // "remoteUser": "vscode"
+}
