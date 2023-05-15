@@ -34,6 +34,7 @@
                 "vscode-icons-team.vscode-icons",
                 "mutantdino.resourcemonitor",
                 "streetsidesoftware.code-spell-checker",
+                "carlos-algms.make-task-provider",
             ],
             "settings": {
                 "workbench.iconTheme": "vscode-icons",

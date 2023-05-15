@@ -30,6 +30,16 @@ RUN curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master
     && sudo chmod 700 get_helm.sh \
     && sudo ./get_helm.sh
 
+# Install kubens
+RUN curl -fsSL https://raw.githubusercontent.com/ahmetb/kubectx/master/kubens -o kubens \
+    && sudo install -m 755 kubens /usr/local/bin \
+    && rm kubens
+
+# Install kubectx
+RUN curl -fsSL https://raw.githubusercontent.com/ahmetb/kubectx/master/kubectx -o kubectx \
+    && sudo install -m 755 kubectx /usr/local/bin \
+    && rm kubectx
+
 ###############################################################################
 
 # [Optional] Uncomment this section to install additional OS packages.
